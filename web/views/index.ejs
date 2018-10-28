@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title><%= title %></title>
+        <meta charset="UTF-8">
+        <!-- Tocas UI：CSS 與元件 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.css">
+        <!-- Tocas JS：模塊與 JavaScript 函式 -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js"></script>
+        <style>
+            .main {
+                padding: 4em 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="ts main container">
+            <% if(typeof msg != "undefined"){ %>
+            <div class="ts inverted positive message">
+                <div class="header"><%= msg %></div>
+            </div>
+            <% } %>
+            <% if(typeof errMsg != "undefined"){ %>
+            <div class="ts inverted negative message">
+                <div class="header"><%= errMsg %></div>
+            </div>
+            <% } %>
+            <div class="ts grid">
+                <div class="stretched column">
+                    <div class="ts header">
+                        210 選（？）座位系統
+                        <div class="sub header">登入者：<%= user.username %></div>
+                    </div>
+                </div>
+                <div class="column">
+                    <a class="ts button" href="./logout">登出</a>
+                </div>
+            </div>
+            <div class="ts container" style="overflow-x: auto">
+                <table class="ts center aligned basic celled table">
+                    <thead>
+                        <tr>
+                            <th colspan="<%= seats[0].length %>">講台</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% seats.forEach(function (row){ %>
+                        <tr>
+                            <% row.forEach(function (no){
+                                if (no == user.no) { %>
+                                <td style="background-color: yellow"><%= no %></td>
+                                <% } else { %>
+                                <td><%= (no != 0) ? no : "X" %></td>
+                                <% }
+                            }); %>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="ts horizontal section divider">
+                <span class="text">我是分隔線</span>
+            </div>
+            <form class="ts form" method="POST" name="seat" action="./">
+                <div class="field">
+                    <div class="three fields">
+                        <div class="disabled field">
+                            <input type="text" placeholder="座號" name="no" id="no" value="<%= user.no %>">
+                        </div>
+                        <div class="field">
+                            <select name="direction" id="direction">
+                                <option value="">Choose here</option>
+                                <% for (key in directions) { %>
+                                    <% var selected = ( key == user.direction ) ? " selected" : ""; %>
+                                <option value="<%= key %>"<%= selected %>><%= directions[key] %></option>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <input type="text" placeholder="格數" name="steps" id="steps" value="<%= user.steps %>">
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <button class="ts right floated inverted primary button">送出</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

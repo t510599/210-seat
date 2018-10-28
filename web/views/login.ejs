@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <!-- Tocas UI：CSS 與元件 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.css">
+        <!-- Tocas JS：模塊與 JavaScript 函式 -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js"></script>
+        <title><%= title %></title>
+        <style type="text/css">
+            body {
+                background: whitesmoke;
+            }
+            .segment {
+                max-width: 300px;
+            }
+            .message {
+                max-width: 350px;
+                margin: auto !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="ts center aligned narrow container">
+            <br>
+            <br>
+            <% if(typeof errMsg != "undefined"){ %>
+            <div class="ts inverted negative message">
+                <div class="header"><%= errMsg %></div>
+            </div>
+            <% } %>
+            
+            <h1 class="ts center aligned header">
+                登入
+            </h1>
+
+            <div class="ts centered secondary segment">
+                <form class="ts form" method="POST" action="./login" name="login">
+                    <div class="field">
+                        <label for="username">帳號</label>
+                        <input placeholder="" type="text" name="username" id="username">
+                    </div>
+                    <div class="field">
+                        <label for="password">密碼</label>
+                        <input placeholder="" type="password" name="password" id="password">
+                    </div>
+                    <button type="button" class="ts positive fluid button" onclick="document.login.submit()">登入</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
