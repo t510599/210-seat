@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title><%= title %></title>
+        <meta charset="UTF-8">
+        <!-- Tocas UI：CSS 與元件 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.css">
+        <!-- Tocas JS：模塊與 JavaScript 函式 -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/2.3.3/tocas.js"></script>
+        <style>
+            .main {
+                padding: 4em 0;
+            }
+
+            .highlight {
+                background-color: yellow !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="ts main container">
+            <div class="ts grid" style="margin-bottom: 1em;">
+                <div class="stretched column">
+                    <div class="ts header">
+                        210 選（？）座位系統
+                    </div>
+                </div>
+                <div class="column">
+                    <a class="ts button" href="./login">登入</a>
+                </div>
+            </div>
+            <div class="ts container" style="overflow-x: auto">
+                <table class="ts center aligned basic celled table">
+                    <thead>
+                        <tr>
+                            <th colspan="<%= seats[0].length %>">講台</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% seats.forEach(function (row){ %>
+                        <tr>
+                            <% row.forEach(function (no){ %>
+                                <td><%= (no != 0) ? no : "X" %></td>
+                            <% }); %>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+                <div class="ts horizontal section divider">
+                    <span class="text">我是分隔線</span>
+                </div>
+                <div class="ts fluid action input">
+                    <input type="text" placeholder="座號" pattern="^\d$" id="input">
+                    <button class="ts button" id="button">搜尋</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.querySelector('#button').addEventListener('click', function () {
+                let seats = document.querySelector('tbody');
+                let target = document.querySelector('#input').value;
+                for (let i = 0; i < seats.children.length; i++) {
+                    for (let j = 0; j < seats.children[i].children.length; j++) {
+                        if (seats.children[i].children[j].innerText == target && target != "X") {
+                            seats.children[i].children[j].classList.toggle('highlight', true);
+                        } else {
+                            seats.children[i].children[j].classList.toggle('highlight', false);
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

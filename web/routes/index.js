@@ -45,6 +45,11 @@ router.post('/', function(req, res, next){
     });
 });
 
+router.get('/show', function(req, res, next) {
+    var seats = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../../cli/seats.txt"), 'utf8'));
+    res.render('show', { title: '自己選自己的', seats: seats});
+});
+
 router.get('/login', function(req, res, next) {
     if (req.session.stdno) {
         return res.redirect('.');
