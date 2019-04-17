@@ -84,7 +84,7 @@ class Seat():
                     print(no, name[direction], steps)
                     printArr(self.seats)
                     print()
-        return seats
+        return self.seats
 
 
 help_msg = '''Please provide mode!
