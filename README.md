@@ -3,7 +3,7 @@
 ## Overview
 一個抽籤選座位程式。先生成一張隨機座位表，再根據所有人輸入的需求進行移動，以達到較為公平的結果。
 
-## Envirnoment
+## Environment
  * Node.js with mongodb installed
  * Python 3.X
  
